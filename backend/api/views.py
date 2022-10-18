@@ -25,7 +25,7 @@ from recipes.models import (FavoriteRecipe, Ingredient, Recipe, ShoppingCart,
                             Follow, Tag)
 from .serializers import (IngredientSerializer, RecipeReadSerializer,
                           RecipeWriteSerializer, SubscribeRecipeSerializer,
-                          SubscribeSerializer, TagSerializer, TokenSerializer,
+                          SubscribeSerializer, TagSerializer, TokSerializer,
                           UserCreateSerializer, UserListSerializer,
                           UserPasswordSerializer)
 
@@ -120,7 +120,7 @@ class AddDeleteShoppingCart(
 
 class AuthToken(ObtainAuthToken):
 
-    serializer_class = TokenSerializer
+    serializer_class = TokSerializer
     permission_classes = (AllowAny,)
 
     def post(self, request, *args, **kwargs):

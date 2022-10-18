@@ -12,17 +12,17 @@ User = get_user_model()
 ERROR_MESSEGE = 'Ошибка при входе. Неверные данные.'
 
 
-class TokenSerializer(serializers.Serializer):
+class TokSerializer(serializers.Serializer):
     email = serializers.CharField(
         label='Email',
         write_only=True)
     password = serializers.CharField(
-        label='Пароль',
+        label='Password',
         style={'input_type': 'password'},
         trim_whitespace=False,
         write_only=True)
     token = serializers.CharField(
-        label='Токен',
+        label='Token',
         read_only=True)
 
     def validate(self, attrs):
@@ -38,9 +38,9 @@ class TokenSerializer(serializers.Serializer):
                     ERROR_MESSEGE,
                     code='authorization')
         else:
-            msg = 'Необходимо указать "адрес электронной почты" и "пароль".'
+            messege = 'Нужен и пароль и адрес почты'
             raise serializers.ValidationError(
-                msg,
+                messege,
                 code='authorization')
         attrs['user'] = user
         return attrs
