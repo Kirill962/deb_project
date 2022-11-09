@@ -5,12 +5,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ../backend/.env
+      - .env
 
   web:
-
     build:
-      context: ../backend/
+      context: .
       dockerfile: Dockerfile
 
     volumes:
@@ -19,13 +18,10 @@ services:
     depends_on:
       - db
     env_file:
-      - ../backend/.env
+      - .env
 
   frontend:
-
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
+    image: kirill2434/frontend:v1.1
     volumes:
       - ../frontend/:/app/result_build/
 

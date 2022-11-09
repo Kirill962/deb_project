@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import (FavoriteRecipe, Ingredient, Recipe, IngredientRecipe,
-                     ShoppingCart, Follow, Tag)
+from .models import (FavoriteRecipe, Follow, Ingredient, IngredientRecipe,
+                     Recipe, ShoppingCart, Tag)
 
 ERROR_MESSAGE = 'empty'
 
