@@ -21,7 +21,7 @@ services:
       - .env
 
   frontend:
-    image: kirill2434/frontend:v1.1
+    image: kirill2434/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
 
