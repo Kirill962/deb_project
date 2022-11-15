@@ -115,3 +115,4 @@ python manage.py runserver
 ```url
 http://127.0.0.1/api/docs/
 ```
+[![foodgram workflow](https://github.com/Kirill2434/foodgram-project-react/actions/workflows/foodgram_project_workflow.yml/badge.svg)](https://github.com/Kirill2434/foodgram-project-react/actions/workflows/foodgram_project_workflow.yml)
