@@ -45,7 +45,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
     @admin.display(description='Содержится в избранном')
     def get_favorite_count(self, obj):
-        return obj.favorite_recipe.count()
+        return obj.in_favorite.count()
 
 
 @admin.register(Tag)
@@ -66,7 +66,7 @@ class IngredientAdmin(admin.ModelAdmin):
 
 
 @admin.register(Follow)
-class SubscribeAdmin(admin.ModelAdmin):
+class FollowAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'user', 'author', 'created',)
     search_fields = (
