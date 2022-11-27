@@ -84,7 +84,7 @@ class FavoriteRecipeAdmin(admin.ModelAdmin):
         description='Recipes')
     def get_recipe(self, obj):
         return [
-            f'{item["name"]} ' for item in obj.recipe.values('name')[:5]]
+            f'{item["name"]} ' for item in obj.recipe.value('name')[:5]]
 
     @admin.display(
         description='Содержится в избранных')
