@@ -160,17 +160,17 @@ class RecipeReadSerializer(serializers.ModelSerializer):
     )
     author = UserListSerializer(read_only=True)
     is_in_shopping_cart = SerializerMethodField(read_only=True)
-    is_favorited = SerializerMethodField(read_only=True)
+    in_favorite = SerializerMethodField(read_only=True)
 
     class Meta:
         model = Recipe
         fields = (
             'id', 'tags', 'author', 'ingredients',
-            'is_favorited', 'is_in_shopping_cart',
+            'in_favorite', 'is_in_shopping_cart',
             'name', 'image', 'text', 'cooking_time'
         )
 
-    def get_is_favorited(self, obj):
+    def get_in_favorite(self, obj):
         request = self.context.get('request')
         if request.user.is_anonymous:
             return False
