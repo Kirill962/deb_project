@@ -77,14 +77,8 @@ class FollowAdmin(admin.ModelAdmin):
 @admin.register(FavoriteRecipe)
 class FavoriteRecipeAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'user', 'get_recipe', 'get_count')
+        'id', 'user', 'get_count')
     empty_value_display = ERROR_MESSAGE
-
-    @admin.display(
-        description='Recipes')
-    def get_recipe(self, obj):
-        return [
-            f'{item["name"]} ' for item in obj.recipe.value('name')[:5]]
 
     @admin.display(
         description='Содержится в избранных')
