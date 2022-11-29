@@ -133,6 +133,7 @@ class RecipeViewSet(ModelViewSet):
 class IngredientViewSet(ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    permission_classes = (IsAdminOrReadOnly,)
     filter_backends = (IngredientFilter,)
     search_fields = ('^name',)
 
