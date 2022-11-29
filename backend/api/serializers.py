@@ -166,7 +166,7 @@ class RecipeReadSerializer(serializers.ModelSerializer):
         model = Recipe
         fields = (
             'id', 'tags', 'author', 'ingredients',
-            'in_favorite', 'is_in_shopping_cart',
+            'in_favorite', 'shopping_cart',
             'name', 'image', 'text', 'cooking_time'
         )
 
@@ -177,7 +177,7 @@ class RecipeReadSerializer(serializers.ModelSerializer):
         return FavoriteRecipe.objects.filter(
             user=request.user, recipe__id=obj.id).exists()
 
-    def get_is_in_shopping_cart(self, obj):
+    def get_in_shopping_cart(self, obj):
         request = self.context.get('request')
         if request.user.is_anonymous:
             return False
@@ -316,7 +316,7 @@ class FollowListSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'email', 'id', 'username', 'first_name', 'last_name',
-            'is_subscribed', 'recipes', 'recipes_count'
+            'follower', 'recipes', 'recipes_count'
         )
 
     def get_recipes_count(self, author):
@@ -352,7 +352,7 @@ class FollowSerializer(serializers.ModelSerializer):
         get_object_or_404(User, username=data['author'])
         if self.context['request'].user == data['author']:
             raise ValidationError({
-                'errors': 'Ты не пожешь подписаться на себя.'
+                'errors': 'Ты не можешь подписаться на себя.'
             })
         if Follow.objects.filter(
                 user=self.context['request'].user,
