@@ -13,7 +13,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .filters import IngredientFilter, RecipeFilter
 from .pagination import LimitPageNumberPagination
-from .permissions import IsAdminOrReadOnly, IsAuthorOrReadOnly
+from .permissions import IsAuthorOrAdminOrReadOnly, IsAuthorOrAdminOrReadOnly
 from .serializers import (FavoriteRecipeSerializer, FollowListSerializer,
                           FollowSerializer, IngredientSerializer,
                           RecipeReadSerializer, RecipeWriteSerializer,
@@ -23,7 +23,7 @@ from users.models import User
 
 
 class UsersViewSet(UserViewSet):
-    pagination_class = LimitPageNumberPagination
+    # pagination_class = LimitPageNumberPagination
 
     @action(['get'], detail=False, permission_classes=[IsAuthenticated])
     def me(self, request, *args, **kwargs):
@@ -82,10 +82,10 @@ class AuthToken(ObtainAuthToken):
 class RecipeViewSet(ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeReadSerializer
-    pagination_class = LimitPageNumberPagination
+    # pagination_class = LimitPageNumberPagination
     filter_backends = (DjangoFilterBackend,)
     filterset_class = RecipeFilter
-    permission_classes = (IsAdminOrReadOnly, IsAuthorOrReadOnly)
+    permission_classes = (IsAuthorOrAdminOrReadOnly, IsAuthorOrAdminOrReadOnly)
 
     def get_serializer_class(self):
         if self.request.method in SAFE_METHODS:
@@ -133,7 +133,7 @@ class RecipeViewSet(ModelViewSet):
 class IngredientViewSet(ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAuthorOrAdminOrReadOnly,)
     filter_backends = (IngredientFilter,)
     search_fields = ('^name',)
 
@@ -141,4 +141,4 @@ class IngredientViewSet(ModelViewSet):
 class TagViewSet(ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAuthorOrAdminOrReadOnly,)
