@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import IngredientFilter, RecipeFilter
-from .permissions import IsAuthorOrAdminOrReadOnly, IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsAuthorOrAdminOrReadOnly
 from .serializers import (FavoriteRecipeSerializer, FollowListSerializer,
                           FollowSerializer, IngredientSerializer,
                           RecipeReadSerializer, RecipeWriteSerializer,
