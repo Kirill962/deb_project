@@ -1,8 +1,7 @@
 from rest_framework import permissions
-from rest_framework.permissions import  BasePermission
 
 
-class  IsAuthorOrAdminOrReadOnly(BasePermission):
+class IsAuthorOrAdminOrReadOnly(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return (
@@ -11,7 +10,7 @@ class  IsAuthorOrAdminOrReadOnly(BasePermission):
             or request.user.is_superuser)
 
 
-class IsAdminOrReadOnly(BasePermission):
+class IsAdminOrReadOnly(permissions.BasePermission):
 
     def has_permission(self, request, view):
         return (
