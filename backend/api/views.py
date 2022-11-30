@@ -12,7 +12,6 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import IngredientFilter, RecipeFilter
-# from .pagination import LimitPageNumberPagination
 from .permissions import IsAuthorOrAdminOrReadOnly, IsAdminOrReadOnly
 from .serializers import (FavoriteRecipeSerializer, FollowListSerializer,
                           FollowSerializer, IngredientSerializer,
