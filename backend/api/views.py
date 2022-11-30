@@ -167,7 +167,6 @@ class RecipeViewSet(ModelViewSet):
     #     response['Content-Disposition'] = f'attachment; filename={filename}'
     #     return
 
-
 class IngredientViewSet(ModelViewSet):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
