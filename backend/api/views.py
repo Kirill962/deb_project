@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet
-
 from recipes.models import (FavoriteRecipe, Follow, Ingredient, Recipe,
                             ShoppingCart, Tag)
 from rest_framework import status
@@ -161,6 +160,7 @@ class RecipeViewSet(ModelViewSet):
     #     response = HttpResponse(shopping_list, content_type='text/plain')
     #     response['Content-Disposition'] = f'attachment; filename={filename}'
     #     return
+
 
 class IngredientViewSet(ModelViewSet):
     queryset = Ingredient.objects.all()
