@@ -1,11 +1,6 @@
-# from datetime import datetime
-#
-# from django.db.models import Sum
-# from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet
-# from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from recipes.models import (FavoriteRecipe, Follow, Ingredient, Recipe,
                             ShoppingCart, Tag)
