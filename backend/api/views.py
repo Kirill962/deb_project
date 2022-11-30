@@ -1,11 +1,11 @@
-from datetime import datetime
-
-from django.db.models import Sum
-from django.http import HttpResponse
+# from datetime import datetime
+#
+# from django.db.models import Sum
+# from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet
-from rest_framework.status import HTTP_400_BAD_REQUEST
+# from rest_framework.status import HTTP_400_BAD_REQUEST
 
 from recipes.models import (FavoriteRecipe, Follow, Ingredient, Recipe,
                             ShoppingCart, Tag)
@@ -135,37 +135,37 @@ class RecipeViewSet(ModelViewSet):
         return self.delete_method_for_actions(
             request=request, pk=pk, model=FavoriteRecipe)
 
-    @action(detail=False, permission_classes=[IsAuthenticated])
-    def download_shopping_cart(self, request):
-        user = request.user
-        if not user.shopping_cart.exists():
-            return Response(status=HTTP_400_BAD_REQUEST)
-
-        ingredients = Ingredient.objects.filter(
-            recipe__shopping_cart__user=request.user
-        ).values(
-            'ingredient__name',
-            'ingredient__measurement_unit'
-        ).annotate(amount=Sum('amount'))
-
-        today = datetime.today()
-        shopping_list = (
-            f'Список покупок: {user.get_full_name()}\n\n'
-            f'Дата: {today:%Y-%m-%d}\n\n'
-        )
-        shopping_list += '\n'.join([
-            f'- {ingredient["ingredient__name"]} '
-            f'({ingredient["ingredient__measurement_unit"]})'
-            f' - {ingredient["amount"]}'
-            for ingredient in ingredients
-        ])
-        shopping_list += f'\n\nFoodgram ({today:%Y})'
-
-        filename = f'{user.username}_shopping_list.txt'
-        response = HttpResponse(shopping_list, content_type='text/plain')
-        response['Content-Disposition'] = f'attachment; filename={filename}'
-
-        return
+    # возвращает None
+    # @action(detail=False, permission_classes=[IsAuthenticated])
+    # def download_shopping_cart(self, request):
+    #     user = request.user
+    #     if not user.shopping_cart.exists():
+    #         return Response(status=HTTP_400_BAD_REQUEST)
+    #
+    #     ingredients = Ingredient.objects.filter(
+    #         recipe__shopping_cart__user=request.user
+    #     ).values(
+    #         'ingredient__name',
+    #         'ingredient__measurement_unit'
+    #     ).annotate(amount=Sum('amount'))
+    #
+    #     today = datetime.today()
+    #     shopping_list = (
+    #         f'Список покупок: {user.get_full_name()}\n\n'
+    #         f'Дата: {today:%Y-%m-%d}\n\n'
+    #     )
+    #     shopping_list += '\n'.join([
+    #         f'- {ingredient["ingredient__name"]} '
+    #         f'({ingredient["ingredient__measurement_unit"]})'
+    #         f' - {ingredient["amount"]}'
+    #         for ingredient in ingredients
+    #     ])
+    #     shopping_list += f'\n\nFoodgram ({today:%Y})'
+    #
+    #     filename = f'{user.username}_shopping_list.txt'
+    #     response = HttpResponse(shopping_list, content_type='text/plain')
+    #     response['Content-Disposition'] = f'attachment; filename={filename}'
+    #     return
 
 
 class IngredientViewSet(ModelViewSet):
